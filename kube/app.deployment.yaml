@@ -46,5 +46,3 @@ spec:
                 secretKeyRef:
                   name: gossip-world-app-secret
                   key: MYSQL_DB
-      imagePullSecrets:
-        - name: docker-rizky
