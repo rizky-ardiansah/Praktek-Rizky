@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gossip-world-db
+  namespace: gossip-world
+spec:
+  selector:
+    app: gossip-world-db
+  ports:
+    - port: 3306
+      targetPort: 3306

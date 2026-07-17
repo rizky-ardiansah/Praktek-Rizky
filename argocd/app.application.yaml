@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gossip-world-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://gitlab.i-3.my.id:8443/bootcamp-group-2/Praktek-Rizky.git
+    targetRevision: main
+    path: kube
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gossip-world
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

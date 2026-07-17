@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gossip-world-db
+  namespace: gossip-world
+  labels:
+    app: gossip-world-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gossip-world-db
+  template:
+    metadata:
+      labels:
+        app: gossip-world-db
+    spec:
+      volumes:
+        - name: gossip-world-db-volume
+          persistentVolumeClaim:
+            claimName: pvc-gossip-world-db
+      containers:
+        - name: gossip-world-db
+          image: mariadb:10.6.3
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: gossip-world-db-volume
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-db-secret
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-db-secret
+                  key: MYSQL_DATABASE
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-db-secret
+                  key: MYSQL_USER
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-db-secret
+                  key: MYSQL_PASSWORD

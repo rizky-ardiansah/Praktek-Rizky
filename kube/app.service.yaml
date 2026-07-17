@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gossip-world-app
+  namespace: gossip-world
+spec:
+  selector:
+    app: gossip-world-app
+  ports:
+    - port: 10007
+      targetPort: 10007

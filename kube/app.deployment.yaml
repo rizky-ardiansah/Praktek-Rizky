@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gossip-world-app
+  namespace: gossip-world
+  labels:
+    app: gossip-world-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gossip-world-app
+  template:
+    metadata:
+      labels:
+        app: gossip-world-app
+    spec:
+      containers:
+        - name: gossip-world-app
+          image: mpots/gossip-world:v1.3.0
+          ports:
+            - containerPort: 10007
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-app-secret
+                  key: SECRET_KEY
+            - name: MYSQL_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-app-secret
+                  key: MYSQL_ENDPOINT
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-app-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-app-secret
+                  key: MYSQL_USER
+            - name: MYSQL_DB
+              valueFrom:
+                secretKeyRef:
+                  name: gossip-world-app-secret
+                  key: MYSQL_DB
+      imagePullSecrets:
+        - name: docker-rizky
