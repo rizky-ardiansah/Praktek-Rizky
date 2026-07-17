@@ -17,16 +17,11 @@ spec:
     spec:
       volumes:
         - name: gossip-world-db-volume
-          persistentVolumeClaim:
-            claimName: pvc-gossip-world-db
       containers:
         - name: gossip-world-db
           image: mariadb:10.6.3
           ports:
             - containerPort: 3306
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: gossip-world-db-volume
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
