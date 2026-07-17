@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://gitlab.i-3.my.id:8443/bootcamp-group-2/Praktek-Rizky.git
+    repoURL: https://github.com/rizky-ardiansah/Praktek-Rizky.git
     targetRevision: main
     path: kube
 
